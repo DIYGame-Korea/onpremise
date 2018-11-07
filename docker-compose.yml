@@ -13,24 +13,29 @@ x-defaults: &defaults
   build: .
   depends_on:
     - redis
-    - postgres
+    # - postgres
     - memcached
-    - smtp
-  env_file: .env
+
   environment:
+    # Run `docker-compose run web config generate-secret-key`
+    # to get the SENTRY_SECRET_KEY value.
+    SENTRY_SECRET_KEY: '=wp8=x6c+vzc9=c6s=07s1eeb3s%@#jp4^^rc@02o%=2q+ahyv'
     SENTRY_MEMCACHED_HOST: memcached
     SENTRY_REDIS_HOST: redis
-    SENTRY_POSTGRES_HOST: postgres
-    SENTRY_EMAIL_HOST: smtp
+    SENTRY_POSTGRES_HOST: tapick-dev.ci5race7ofv6.ap-northeast-2.rds.amazonaws.com
+    SENTRY_EMAIL_HOST: smtp.gmail.com
+    SENTRY_EMAIL_PORT: 587
+    SENTRY_EMAIL_USER: diygame@diyga.me
+    SENTRY_EMAIL_PASSWORD: Dkdlel301!@
+    SENTRY_SERVER_EMAIL: sentry@tapick.net
+    SENTRY_DB_NAME: sentry
+    SENTRY_DB_USER: id301
+    SENTRY_DB_PASSWORD: vneld301!P
+
   volumes:
     - sentry-data:/var/lib/sentry/files
 
-
 services:
-  smtp:
-    restart: unless-stopped
-    image: tianon/exim4
-
   memcached:
     restart: unless-stopped
     image: memcached:1.4
@@ -38,12 +43,6 @@ services:
   redis:
     restart: unless-stopped
     image: redis:3.2-alpine
-
-  postgres:
-    restart: unless-stopped
-    image: postgres:9.5
-    volumes:
-      - sentry-postgres:/var/lib/postgresql/data
 
   web:
     <<: *defaults
@@ -58,9 +57,5 @@ services:
     <<: *defaults
     command: run worker
 
-
 volumes:
     sentry-data:
-      external: true
-    sentry-postgres:
-      external: true

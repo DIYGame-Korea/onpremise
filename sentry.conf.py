@@ -1,3 +1,6 @@
+import os
+import os.path
+from sentry.conf.server import *  # NOQA
 # This file is just Python, with a touch of Django which means
 # you can inherit and tweak settings to your hearts content.
 
@@ -33,10 +36,6 @@
 #  GITHUB_API_SECRET
 #  BITBUCKET_CONSUMER_KEY
 #  BITBUCKET_CONSUMER_SECRET
-from sentry.conf.server import *  # NOQA
-
-import os
-import os.path
 
 CONF_ROOT = os.path.dirname(__file__)
 
@@ -255,7 +254,7 @@ SENTRY_WEB_OPTIONS = {
 email = env('SENTRY_EMAIL_HOST') or (env('SMTP_PORT_25_TCP_ADDR') and 'smtp')
 if email:
     SENTRY_OPTIONS['mail.backend'] = 'smtp'
-    SENTRY_OPTIONS['mail.host'] = email
+    SENTRY_OPTIONS['mail.host'] = env('SENTRY_EMAIL_HOST')
     SENTRY_OPTIONS['mail.password'] = env('SENTRY_EMAIL_PASSWORD') or ''
     SENTRY_OPTIONS['mail.username'] = env('SENTRY_EMAIL_USER') or ''
     SENTRY_OPTIONS['mail.port'] = int(env('SENTRY_EMAIL_PORT') or 25)

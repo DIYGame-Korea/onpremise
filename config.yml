@@ -7,14 +7,14 @@
 # Mail Server #
 ###############
 
-# mail.backend: 'smtp'  # Use dummy if you want to disable email entirely
-# mail.host: 'localhost'
-# mail.port: 25
-# mail.username: ''
-# mail.password: ''
-# mail.use-tls: false
+mail.backend: 'smtp'  # Use dummy if you want to disable email entirely
+mail.host: 'smtp.gmail.com'
+mail.port: 587
+mail.username: 'diygame@diyga.me'
+mail.password: 'Dkdlel301!@'
+mail.use-tls: true
 # The email address to send on behalf of
-# mail.from: 'root@localhost'
+mail.from: 'sentry@tapick.net'
 
 # If you'd like to configure email replies, enable this.
 # mail.enable-replies: false
@@ -33,7 +33,7 @@
 # If this file ever becomes compromised, it's important to regenerate your a new key
 # Changing this value will result in all current sessions being invalidated.
 # A new key can be generated with `$ sentry config generate-secret-key`
-# system.secret-key: 'changeme'
+system.secret-key: '=wp8=x6c+vzc9=c6s=07s1eeb3s%@#jp4^^rc@02o%=2q+ahyv'
 
 # The ``redis.clusters`` setting is used, unsurprisingly, to configure Redis
 # clusters. These clusters can be then referred to by name when configuring
@@ -52,11 +52,11 @@
 # Uploaded media uses these `filestore` settings. The available
 # backends are either `filesystem` or `s3`.
 
-# filestore.backend: 'filesystem'
-# filestore.options:
-#   location: '/tmp/sentry-files'
+filestore.backend: 'filesystem'
+filestore.options:
+  location: '/tmp/sentry-files'
 
-# filestore.backend: 's3'
+# falseilestore.backend: 's3'
 # filestore.options:
 #   access_key: 'AKIXXXXXX'
 #   secret_key: 'XXXXXXX'
